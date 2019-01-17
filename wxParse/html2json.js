@@ -177,6 +177,17 @@ function html2json(html, bindName) {
                     }
                 }
             }
+            
+            // 处理 td
+            if (node.tag === 'td') {
+                //  如果有宽度，设置为 flex-grow
+                if (node.attr.width) {
+                    node.attr.style.push('flex-grow');
+                    node.attr.style.push(parseInt(node.attr.width));
+                    if (!node.styleStr) node.styleStr = '';
+                    node.styleStr += 'flex-grow: ' + node.attr.width;
+                }
+            }
 
             //临时记录source资源
             if(node.tag === 'source'){
